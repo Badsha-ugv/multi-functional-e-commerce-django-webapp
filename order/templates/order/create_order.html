@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order Now {% endblock %}
+
+{% block content %}
+
+<div class="row d-flex justify-content-evenly">
+    <div class="col-6 bg-secondary p-3 " >
+        <h3>Checkout</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+           <!-- {% for i in form %}
+            <label for="" class="text-white">{{i.label}}</label>
+            <input type="{{i.type}}" class="form-control" placeholder="{{i.label}}"> -->
+           <!-- {% endfor %} -->
+            <!-- {{form.as_p}} -->
+             {% for f in form %}
+             <label for="">{{f.label}}</label>
+             {{f}}
+             {% endfor %}
+            <input type="submit" value="Confirm Order" class="mt-2 btn btn-primary float-end">
+        </form>
+    </div>
+
+    <div class="col-3 ">
+        <div class="row bg-secondary p-3">
+            <h4 class="ps-0">Your Order:</h4>
+           <table class="table table-bordered">
+               {% for item in cart %}
+            <tr>
+                <td>{{item.quantity}}x</td>
+                <td>{{item.product.name}}</td>
+                <td>{{item.total_price}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>${{cart.get_total_price}}</td>
+            </tr>
+           </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
