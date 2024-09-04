@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Thank you! {% endblock %}
+
+{% block content %}
+
+<div class="text-center">
+    <h1>Thank you</h1>
+    <p>Your order has been successfully completed. Your order number is 
+  <strong>{{ order.id }}</strong>.</p>
+ <br>
+  <a href="{% url 'shop:product_list' %}" class="btn btn-secondary">Continue Shopping</a>
+</div>
+
+{% endblock %}
