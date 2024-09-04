@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} My Cart {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-8 mx-auto">
+        <h1>Your Shopping Cart</h1>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Remove</th>
+                    <th>Unit Price</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                {% with product=item.product %}
+                <tr>
+                    <td>
+                        <div class="product-img" style="width: 100px; border: 1px solid;">
+
+                            <a href="{{product.get_absolute_url}}">
+                                {% if product.image %} <img src="{{product.image.url}}" class="img-fluid" alt="">
+                                {% else %} <img src="{% static 'images/no-pic.jpg' %}" class="img-fluid" alt="">
+                                {% endif %}
+                            </a>
+                        </div>
+                    </td>
+                    <td>{{product.name}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td><a href="{% url 'cart:cart_remove' product.id %}">remove</a></td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.total_price}}</td>
+                </tr>
+                {% endwith %}
+                {% endfor %}
+                <tr>
+                    <td colspan="4"></td>
+                    <td class="fw-bold">Total</td>
+                    <td class="fw-bold">$ {{cart.get_total_price}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="text-end">
+            <a href="{% url 'shop:product_list' %}" class="btn btn-secondary">Continue Shopping</a>
+            <a href="" class="btn btn-primary">Checkout</a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}

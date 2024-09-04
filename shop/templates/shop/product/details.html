@@ -24,6 +24,11 @@
         </p>
         <hr>
         <h3>$ {{product.price}}</h3>
+        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" value="Add Cart">
+        </form>
     </div>
 </div>
 
