@@ -32,13 +32,15 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import render_to_string 
 from weasyprint import HTML 
+import weasyprint
+
 
 def invoice(request,order_id):
     
     order = get_object_or_404(Order, id=order_id)
     html_string = render_to_string('order/pdf.html',{'order':order})
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'inline; filename=invoice_{order_id}.pdf'
+    response['Content-Disposition'] = f' filename=invoice_{order_id}.pdf'
     HTML(string=html_string).write_pdf(response)
     
     # html = render_to_string('order/pdf.html',{'order':order})
