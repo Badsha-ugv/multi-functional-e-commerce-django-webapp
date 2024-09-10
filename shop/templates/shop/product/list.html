@@ -33,10 +33,11 @@
                             {% if product.image %} <img src="{{product.image.url}}" class="img-fluid" alt=""> {% else %} <img src="{% static '/images/no-pic.jpg' %}" class="img-fluid" alt=""> {% endif %}
                         </div>
 
-                        <div class="card-title">{{product.name}}</div>
+                        <div class="fw-bold text-center p-3 pb-0">{{product.name}}</div>
                     </a>
-                    <div class="card-body">
-                        <div class="card-subtitle">$ &nbsp;{{product.price}}</div>
+                    <hr>
+                    <div class="card-body text-center mt-0 pt-0">
+                        <div class="card-subtitle fw-bold">$ &nbsp;{{product.price}}</div>
                     </div>
                 </div>
             </div>
